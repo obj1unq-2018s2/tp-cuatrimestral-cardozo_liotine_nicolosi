@@ -5,6 +5,7 @@ class Campeon{
 	var property cantidadDeBloqueos = 0
 	const property items = #{}
 	
+	
 	method estaMuerto() = puntosDeVida <= puntosDeDanio
 	
 	method puntosDeVida() = puntosDeVida + items.sum({item => item.puntosDeVidaEquipamiento()})
