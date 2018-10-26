@@ -23,6 +23,14 @@ class Campeon{
 		puntosDeDanio += item.puntosDeDanioDesequipamiento()
 		cantidadDeBloqueos += item.bloqueosDesequipamiento()
 	}
+	
+	method defensaDe(oleada){
+		puntosDeDanio += self.danioDe(oleada)
+	}
+	
+	method danioDe(oleada){
+		return oleada.cantidadMinions() + oleada.plus()
+	}
 }
 
 
