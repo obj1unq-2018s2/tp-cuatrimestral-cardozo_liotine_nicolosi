@@ -30,7 +30,3 @@ class SombreroDeRabadon inherits TomoAmplificador {
 	override method puntosDeDanioDesequipamiento() = 0
 	override method bloqueosDesequipamiento() = 0
 }
-
-
-
-

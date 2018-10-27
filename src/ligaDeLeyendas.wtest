@@ -1,3 +1,16 @@
+import items.*
+import contrincantes.*
+
 describe "tests de liga de leyendas"{
-	
+	const campeon1 = new Campeon (puntosDeVida = 50, puntosDeAtaque = 15)
+	const item1 = new AnilloDeDoran ()
+	const item2 = new TomoAmplificador ()
+	const oleada1 = new Oleada (cantidadMinions = 10, plus = 5)
+	test "test" {
+		campeon1.equipar(item1)
+		campeon1.equipar(item2)
+		campeon1.atacar(oleada1)
+		campeon1.desequipar(item2)
+		assert.that(campeon1.estaMuerto())
+	}
 }

@@ -31,14 +31,6 @@ class Campeon{
 	method recibirDanio(cantidad){
 		puntosDeDanio += cantidad
 	}
-	
-	//method defensaDe(oleada){
-		//puntosDeDanio += self.danioDe(oleada)
-	//}
-	
-//	method danioDe(oleada){
-	//	return oleada.cantidadMinions() + oleada.plus()
-	//}
 }
 
 class Oleada {
