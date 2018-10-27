@@ -24,13 +24,21 @@ class Campeon{
 		cantidadDeBloqueos += item.bloqueosDesequipamiento()
 	}
 	
-	method defensaDe(oleada){
-		puntosDeDanio += self.danioDe(oleada)
+	method atacar(oleada){
+		oleada.recibirAtaqueDe(self)
 	}
 	
-	method danioDe(oleada){
-		return oleada.cantidadMinions() + oleada.plus()
+	method recibirDanio(cantidad){
+		puntosDeDanio += cantidad
 	}
+	
+	//method defensaDe(oleada){
+		//puntosDeDanio += self.danioDe(oleada)
+	//}
+	
+//	method danioDe(oleada){
+	//	return oleada.cantidadMinions() + oleada.plus()
+	//}
 }
 
 
@@ -47,7 +55,7 @@ class AnilloDeDoran {
 
 
 class TomoAmplificador {
-	method puntosDeVidaEquipamiento(campeon) = campeon.puntosDeVida() * 0.25
+	method puntosDeVidaEquipamiento(campeon) = campeon.puntosDeDanio() * 0.25
 	method puntosDeAtaqueEquipamiento(campeon) = campeon.puntosDeDanio() * 0.05
 	method puntosDeDanioEquipamiento() = 0
 	method bloqueosEquipamiento() = 2
@@ -69,6 +77,18 @@ class SombreroDeRabadon inherits TomoAmplificador {
 
 
 class Oleada {
+	var property puntosVida = 0
+	var property puntosDanio = 0
 	var property cantidadMinions = 0
 	var property plus = 0
+	method recibirAtaqueDe(campeon){
+		self.recibirDanio(campeon.puntosDeAtaque())
+		self.defenderseDe(campeon)
+	}
+	method defenderseDe(campeon){
+		campeon.recibirDanio(cantidadMinions + plus)
+	}
+	method recibirDanio(cantidad){
+		puntosDanio += cantidad
+	}
 }
