@@ -29,7 +29,12 @@ class Campeon{
 	}
 	
 	method recibirDanio(cantidad){
-		puntosDeDanio += cantidad
+		if(cantidadDeBloqueos > 0){
+			cantidadDeBloqueos -= 1
+		}
+		else{
+			puntosDeDanio += cantidad	
+		}
 	}
 }
 
