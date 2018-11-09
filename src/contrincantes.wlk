@@ -1,6 +1,7 @@
 class Campeon{
-	const puntosDeVida = 0
-	const puntosDeAtaque = 0
+	var property puntosDeVida = 0
+	var property puntosDeAtaque = 0
+	const property puntosDeAtaqueBase = 0
 	var property puntosDeDanio = 0
 	var property cantidadDeBloqueos = 0
 	const property items = #{}
@@ -11,6 +12,13 @@ class Campeon{
 	method puntosDeVida() = puntosDeVida + items.sum({item => item.puntosDeVidaEquipamiento(self)})
 	
 	method puntosDeAtaque() = puntosDeAtaque + items.sum({item => item.puntosDeAtaqueEquipamiento(self)})
+	
+	//	method equipar ( item) {
+	//	item.equipar (self)
+	//	}
+	//	method desequipar (item) {
+	//	item.desequipar (self)
+	//	} matias
 	
 	method equipar(item) {
 		items.add(item)
