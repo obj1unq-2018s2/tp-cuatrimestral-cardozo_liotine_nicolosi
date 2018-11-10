@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>C:\Users\Cris y Eli\git\tp-cuatrimestral-cardozo_liotine_nicolosi\.README.md.html</title>
+<title>C:\Users\Alumno\git\tp-cuatrimestral-cardozo_liotine_nicolosi\.README.md.html</title>
 
 
 <style type="text/css">
@@ -643,8 +643,8 @@ function setDocumentScrollTop(ypos)
 <p>Se nos pide modelar un peque&ntilde;o sistema de batallas basado en el popular video juego League of Legends (a.k.a. Lol). El sistema se basar&aacute; en batallas de campeones contra oleadas de <em>minions</em>. No habr&aacute;, al menos de momento, batallas entre campeones (conocidas popularmente como batallas en equipo).</p> 
 <p>Las batallas est&aacute;n basadas en un sistema simple de ataque y defensa. Cuando un campe&oacute;n ataca le produce una da&ntilde;o a la oleada de minions igual a los puntos de ataque que posee el campe&oacute;n. Sin embargo, &eacute;ste recibe a su vez un da&ntilde;o, producido por los minions que se defienden. El da&ntilde;o es igual a la cantidad de minions que conforman la oleada m&aacute;s un plus que es definido en cada oleada.</p> 
 <h2> <a id="parte-1" class="anchor" href="#parte-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Parte 1:</h2> 
-<p>Como se explic&oacute; antes, los campeones poseen puntos de ataque y puntos de vida, que var&iacute;an de campe&oacute;n en campe&oacute;n. Cuando un campe&oacute;n batalla acumula puntos de da&ntilde;o; los puntos de vida representan la cantidad de da&ntilde;o que puede resistir el campe&oacute;n antes de morir. De esta forma, cuando los puntos de da&ntilde;o son iguales a los puntos de vida, al campe&oacute;n se lo considera muerto.</p> 
-<p>Para ayudar a la supervivencia del campe&oacute;n, existen los bloqueos. Un bloqueo es la capacidad de resistir todo el da&ntilde;o que el campe&oacute;n recibe en una batalla contra una oleada de minions. Esto quiere decir que, si un campe&oacute;n posee un bloqueo y batallo contra una oleada de minions, en esa batalla no recibir&aacute; da&ntilde;o alguno. Cada bloqueo sirve para una sola batalla y luego se pierde.</p> 
+<p>Como se explic&oacute; antes, los campeones poseen puntos de ataque y puntos de vida, que var&iacute;an de campe&oacute;n en campe&oacute;n. Cuando un campe&oacute;n batalla acumula puntos de da&ntilde;o; los puntos de vida representan la cantidad de da&ntilde;o que puede resistir el campe&oacute;n antes de morir. De esta forma, cuando los puntos de da&ntilde;o son iguales a los puntos de vida, al campe&oacute;n se lo considera muerto.<br /> <strong>Atenci&oacute;n</strong>: los puntos de da&ntilde;o de un campe&oacute;n <em>no pueden ser nunca negativos</em>. Al modificarlos, hay que validar que no queden por debajo de cero.</p> 
+<p>Para ayudar a la supervivencia del campe&oacute;n, existen los <em>bloqueos</em>.<br /> Un bloqueo es la capacidad de resistir todo el da&ntilde;o que el campe&oacute;n recibe en una batalla contra una oleada de minions. Esto quiere decir que, si un campe&oacute;n posee un bloqueo y batallo contra una oleada de minions, en esa batalla no recibir&aacute; da&ntilde;o alguno. Cada bloqueo sirve para una sola batalla y luego se pierde.</p> 
 <p>Los campeones pueden equiparse o desequiparse items. Esto tiene dos consecuencias:</p> 
 <ol> 
  <li>Los items, al ser equipados o desequipados en el campe&oacute;n, producen un efecto en el campe&oacute;n (que puede ser tanto positivo como negativo).</li> 
@@ -662,9 +662,105 @@ function setDocumentScrollTop(ypos)
 <ul> 
  <li>Crear un campe&oacute;n con 50 puntos de vida y 15 de ataque.</li> 
  <li>Equiparlo con un anillo de Doran y un Tomo Amplificador.</li> 
- <li>Crear una Oleada de 10 minions con un plus de 5 puntos de da&ntilde;o.</li> 
- <li>Hacer que el campe&oacute;n ataque a la oleada de minions y luego se desequipe el Tomo Amplificador.</li> 
- <li>Probar que el campe&oacute;n esta muerto tras haberse desequipado el tomo.</li> 
+ <li>Crear una Oleada de 10 minions <strong>con un plus de 25 puntos de da&ntilde;o</strong>.</li> 
+ <li>Hacer que el campe&oacute;n ataque a la oleada de minions tres veces.</li> 
+ <li>Hacer que se desequipe, primero el Tomo Amplificador, y despu&eacute;s el Anillo.</li> 
+ <li>Probar que el campe&oacute;n esta muerto tras haberse desequipado ambos &iacute;tems.</li> 
+</ul> 
+<h2> <a id="parte-2" class="anchor" href="#parte-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Parte 2:</h2> 
+<p>En esta segunda parte contemplaremos algunos agregados al dominio.</p> 
+<h3> <a id="las-oleadas-reciben-da&ntilde;os" class="anchor" href="#las-oleadas-reciben-da%C3%B1os" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Las oleadas reciben da&ntilde;os</h3> 
+<p>En esta segunda etapa las oleadas de minions, al recibir da&ntilde;o, reduzca su cantidad de minions en un n&uacute;mero igual al da&ntilde;o recibido. Recordemos que el da&ntilde;o que recibe la oleada equivale a los puntos de ataque <em>totales</em> (incluyendo los de base m&aacute;s los que le proveen los &iacute;tems) del campe&oacute;n atacante.<br /> En caso de llegar a 0 el escuadr&oacute;n se considera muerto.<br /> Cuando un campe&oacute;n ataca a un escuadron muerto no recibe da&ntilde;o de ning&uacute;n tipo ni dinero (ver manejo de dinero a continuaci&oacute;n).</p> 
+<h3> <a id="actualizaci&oacute;n-de-los-tests" class="anchor" href="#actualizaci%C3%B3n-de-los-tests" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Actualizaci&oacute;n de los tests</h3> 
+<p>Tras haber hecho estos cambios el primer test fallara debido a que en cada ataque van muriendo minions. Modifique el test para que se vea reflejado el siguiente escenario:</p> 
+<ul> 
+ <li>Crear un campe&oacute;n con 50 puntos de vida y 15 de ataque.</li> 
+ <li>Hacer que se equipe un Anillo de Doran.</li> 
+ <li>Hacer que se equipe un Tomo Amplificador.</li> 
+ <li>Crear una oleada de 10 minions con un plus de 25 puntos de da&ntilde;o.</li> 
+ <li>Hacer que el campe&oacute;n ataque a la oleada de minions tres veces.<br /> Aclaraci&oacute;n: la oleada se muere luego del primer ataque; a pesar de eso, en este test el campe&oacute;n la ataca dos veces m&aacute;s.</li> 
+ <li>Hacer que se desequipe el Anillo de Doran.</li> 
+ <li>Hacer que se desequipe el Tomo Amplificador.</li> 
+ <li>Hacer que se equipe otro Tomo Amplificador</li> 
+ <li>Hacer que se desequipe el segundo Tomo Amplificador</li> 
+ <li>Probar que el campe&oacute;n esta muerto tras haberse desequipado.</li> 
+</ul> 
+<p><strong>Atenci&oacute;n</strong>: este test no incluye manejo de dinero (que se explica en el punto siguiente).</p> 
+<h3> <a id="dinero" class="anchor" href="#dinero" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dinero</h3> 
+<p>En esta nueva etapa, cada campe&oacute;n posee una cantidad de dinero y los items que se puede equipar tienen un precio. Entonces para que un campe&oacute;n pueda equiparse un objeto, debe pagar el precio correspondiente. Agregar a los campeones los m&eacute;todos <code>comprar(item)</code> y <code>vender(item)</code>. Al comprar un item, si tengo el dinero para comprarlo, gasto el dinero y me equipo el item. Al vender un item, gano la mitad del dinero de su precio y desequipo el item.</p> 
+<p>Al atacar a una oleada de minions, un campe&oacute;n gana una cantidad de dinero igual a la cantidad de minions eliminados de la oleada.<br /> <strong>Atenci&oacute;n</strong>: la cantidad de minions que quedan eliminados puede ser distinta a los puntos de ataque del campe&oacute;n. P.ej. si un campe&oacute;n con 50 puntos de ataque ataca a una oleada de 20 minions, el dinero que gana es 20, no 50.</p> 
+<h3> <a id="modificaciones-a-los-items-equipables" class="anchor" href="#modificaciones-a-los-items-equipables" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Modificaciones a los items equipables</h3> 
+<p>Adem&aacute;s de precio, se pide agregar a los items equipables una habilidad <em>activable</em>, esto es, una habilidad que se puede activar en cualquier momento, seg&uacute;n la siguiente descripci&oacute;n:</p> 
+<ul> 
+ <li> <p><strong>Anillo de Doran:</strong> Cuesta 300, no posee habilidad activable.</p> </li> 
+ <li> <p><strong>Tomo Amplificador:</strong> Cuesta 500 y su habilidad activable consiste en que, cuando el campe&oacute;n posee menos de 500 de dinero, autom&aacute;ticamente transforma su dinero en 500. S&oacute;lo puede ser usada una vez.</p> </li> 
+ <li> <p><strong>Sombrero de Rabadon:</strong> Cuesta 100 m&aacute;s que un Tomo Amplificador, no posee habilidad activable.<br /> <strong>&iexcl;OJO!</strong> no vale poner &quot;600&quot;, hay que poner &quot;100 m&aacute;s que un (nuevo) Tomo Amplificador&quot;, de forma tal que si por alguna raz&oacute;n el precio del Tomo aumenta a 700, el del Sombrero aumente <em>autom&aacute;ticamente</em> a 800.</p> </li> 
+</ul> 
+<p>Tambi&eacute;n se pide agregar un nuevo objeto:</p> 
+<ul> 
+ <li> <strong>Pocion de Vida:</strong> No aporta puntos de ataque ni vida, su precio es 50. No hace nada al equiparse ni al desequiparse. Su habilidad activable consiste en descontar 50 puntos de da&ntilde;o al campe&oacute;n. Una poci&oacute;n de vida se puede usar hasta dos veces, despu&eacute;s de la segunda vez, su habilidad activable no hace nada.</li> 
+</ul> 
+<h2> <a id="parte-individual" class="anchor" href="#parte-individual" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Parte Individual:</h2> 
+<blockquote> 
+ <p>IMPORTANTE: A continuaci&oacute;n se describen tres tareas. Cada integrante del grupo debera elegir una de ellas. Todos deber&aacute;n continuar trabajando sobre el mismo repositorio, coordinando para que cada une pueda realizar su parte. En el momento de la entrega, obtendr&aacute;n dos calificaciones, una grupal y la otra individual.</p> 
+ <p>En caso de que existan grupos de menos de 3 integrantes, cada integrante debe elegir s&oacute;lo una tarea (y quedar&aacute; una tarea sin resolver).</p> 
+</blockquote> 
+<h2> <a id="soporte" class="anchor" href="#soporte" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Soporte</h2> 
+<p>Agregar los <em>soportes</em>. Un soporte se comporta de manera similar a un campe&oacute;n pero no puede andar s&oacute;lo, debe vincularse con un campe&oacute;n, aunque puede cambiar de v&iacute;nculo cuando lo desee. Cada vez que ataca, reduce en 10 puntos el da&ntilde;o total que posee el campe&oacute;n. Un soporte <em>agrega</em> a su inventario, los items que tenga el campe&oacute;n al que se presta como soporte. Esto sirve para lo que aporta cada item en ataque y vida; <strong>no incluye</strong> las consecuencias de equiparse, desequiparse y activar la habilidad activable.<br /> Por otro lado, un soporte tiene sus propios items, que compra con su dinero. Estos items no se agregan al inventario del campe&oacute;n, es <em>solamente</em> en el otro sentido.</p> 
+<blockquote> 
+ <p>TIP: Considere usar el metodo inventario(), en vez de usar el atributo inventario en cada lugar que se use en la clase Campeon.</p> 
+</blockquote> 
+<p>Crear el siguiente test:</p> 
+<ul> 
+ <li>Crear a Draven, un campe&oacute;n con 150 puntos de vida y 25 de ataque y 1000 de dinero.</li> 
+ <li>Crear a Maokai, un campe&oacute;n con 150 puntos de vida y 25 de ataque y 1000 de dinero.</li> 
+ <li>Crear a Janna, una soporte con 150 puntos de vida y 25 de ataque y 100 de dinero.</li> 
+ <li>Crear un oleada de minions con 100 integrantes y 0 de plus de da&ntilde;o.</li> 
+ <li>Que Janna vincule a Draven para ser su soporte.</li> 
+ <li>Que Draven ataque a la oleada de Minions.</li> 
+ <li>Que Janna ataque a la oleada de Minions.</li> 
+ <li>Que Janna vincule a Maokai para ser su soporte.</li> 
+ <li>Que Maokai ataque a la oleada de Minions.</li> 
+ <li>Que Janna ataque a la oleada de Minions.</li> 
+ <li>Que Maokai compre un Tomo Amplificador.</li> 
+ <li>Que Janna compre una poci&oacute;n de vida.</li> 
+ <li>Comprobar que la oleada de minions esta muerta.</li> 
+ <li>Comprobar que el da&ntilde;o recibido por Draven es de 90, ya que Janna le reducio en 10 el da&ntilde;o total recibido.</li> 
+ <li>Comprobar que el da&ntilde;o recibido por Maokai es de 40, ya que Janna le reducio en 10 el da&ntilde;o total recibido.</li> 
+ <li>Comprobar que Maokai tiene 525 de dinero, por haber comprado el Tomo Amplificador.</li> 
+ <li>Comprobar que Janna tiene 100 de dinero, por haber comprado una pocion de vida.</li> 
+ <li>Comprobar que Janna tiene una pocion de vida en su inventario.</li> 
+ <li>Comprobar que Janna tiene un Tomo Amplificador en su inventario.</li> 
+</ul> 
+<h2> <a id="nuevo-&iacute;tem-bast&oacute;n-del-vac&iacute;o" class="anchor" href="#nuevo-%C3%ADtem-bast%C3%B3n-del-vac%C3%ADo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Nuevo &iacute;tem: Bast&oacute;n del Vac&iacute;o</h2> 
+<p>Crear el &iacute;tem Baston del Vacio. A este &iacute;tem se le puede agregar &iacute;tems como materiales del bast&oacute;n en cualquier momento.</p> 
+<ul> 
+ <li>Su precio es 0, aunque tenga cargados materiales (que le llegan &quot;de regalo&quot; al campe&oacute;n que equipe el Bast&oacute;n).</li> 
+ <li>Aporta la mitad de puntos de vida por elemento que tenga como materiales</li> 
+ <li>Suma la totalidad de puntos en ataque</li> 
+ <li>No tiene efecto al equiparse ni al desequiparse.</li> 
+ <li>Su habilidad activable es igual a las habilidades activables de todos sus materiales.</li> 
+</ul> 
+<p>Crear el siguiente test:</p> 
+<ul> 
+ <li>Crear un campe&oacute;n con 50 puntos de vida, 15 puntos de ataque, y 800 de dinero.</li> 
+ <li>Equipar al campe&oacute;n con dos anillos de doran distintos.</li> 
+ <li>Crear un Baston del Vacio y agregar como materiales una pocion de vida y un Sombrero de Rabadon.</li> 
+ <li>Equipar al campe&oacute;n con el Baston del Vacio.</li> 
+ <li>Activar la habilidad del Baston del vacio.</li> 
+ <li>Comprobar que el campeon tiene 0 de da&ntilde;o recibido, producto de haberse recuperado los 10 puntos de da&ntilde;o provocados por los anillos, gracias a la pocion de vida dentro del Baston del Vacio.</li> 
+ <li>Comprobar que el campe&oacute;n tiene 500 de dinero, gracias al Sombrero de Rabadon dentro del Baston del Vacio.</li> 
+</ul> 
+<h2> <a id="ej&eacute;rcito-de-minions" class="anchor" href="#ej%C3%A9rcito-de-minions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ej&eacute;rcito de Minions:</h2> 
+<p>Crear la clase Ejercito de minions, que tiene un comportamiento similar a una Oleada, pero que esta compuesta por muchas oleadas de Minions. Un ejercito de Minions esta muerto cuando todas sus oleadas estan muertas. Cuando un ej&eacute;rcito de Minions recibe da&ntilde;o, todas sus oleadas reciben el mismo da&ntilde;o; an&aacute;logamente, cuando una oleada de minions provoca da&ntilde;o, todas las oleadas le provocaran el mismo da&ntilde;o al campe&oacute;n que si atacaran por separado.</p> 
+<p>Crear el siguiente test:</p> 
+<ul> 
+ <li>Crear un campe&oacute;n con 50 puntos de vida, 20 puntos de ataque, y 300 de dinero.</li> 
+ <li>Crear una oleada de Minions con 20 integrantes y un plus de da&ntilde;o de 5.</li> 
+ <li>Crear otra oleada de Minions con 10 integrantes y un plus de da&ntilde;o de 15.</li> 
+ <li>Crear un ejercito de Minions que contenga a las dos oleadas anteriormente creadas.</li> 
+ <li>Que el campe&oacute;n ataque al ej&eacute;rcito de Minions.</li> 
+ <li>Comprobar que tanto el campe&oacute;n como el Ej&eacute;rcito de Minions estan muertos.</li> 
 </ul>
 </body>
 </html>
