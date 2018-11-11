@@ -1,0 +1,15 @@
+import contrincantes.*
+
+describe "tests de ejercito de Minions" {
+
+	const campeon1 = new Campeon(puntosDeVidaBase = 50, puntosDeAtaqueBase = 20, dinero = 300)
+	const oleada1 = new Oleada(cantidadMinionsBase = 20, plus = 5)  
+	const oleada2 = new Oleada(cantidadMinionsBase = 10, plus = 15)
+	const ejercitoDeMinions = new EjercitoDeMinions(oleadas = #{oleada1, oleada2})     
+		
+	test "test" {
+		campeon1.atacar(ejercitoDeMinions)
+		assert.that(campeon1.estaMuerto())
+		assert.that(ejercitoDeMinions.estaMuerto())
+	}
+}

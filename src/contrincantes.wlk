@@ -41,9 +41,9 @@ class Campeon {
 		item.desequipar(self)
 	}
 	
-	method atacar(oleada){
-		dinero += oleada.cantidadMinions().min(self.puntosDeAtaque())
-		oleada.recibirAtaqueDe(self)
+	method atacar(ejercitoDeMinions){
+		dinero += ejercitoDeMinions.oleadas().sum({oleada => oleada.cantidadMinions().min(self.puntosDeAtaque())})
+		ejercitoDeMinions.recibirAtaqueDe(self)
 	}
 	
 	method recibirDanio(cantidad){
@@ -63,8 +63,8 @@ class Oleada {
 	var property plus = 0
 	method recibirAtaqueDe(campeon){
 		if(not self.estaMuerta()){
-			self.recibirDanio(campeon.puntosDeAtaque())
 			self.defenderseDe(campeon)
+			self.recibirDanio(campeon.puntosDeAtaque())
 		}
 	}
 	method defenderseDe(campeon){
@@ -76,5 +76,24 @@ class Oleada {
 	method cantidadMinions() = (cantidadMinionsBase - puntosDanio).max(0)
 	method estaMuerta() = cantidadMinionsBase <= puntosDanio
 }
+
+
+
+
+class EjercitoDeMinions {
+	const property oleadas = #{}
+	
+	method estaMuerto(){
+		return oleadas.all({oleada => oleada.estaMuerta()})
+	}
+	
+	method recibirAtaqueDe(campeon){
+		oleadas.forEach({oleada => oleada.recibirAtaqueDe(campeon)})
+	}
+}
+
+
+
+
 
 

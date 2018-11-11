@@ -45,7 +45,6 @@ class SombreroDeRabadon inherits TomoAmplificador {
 	override method puntosDeVidaEquipamiento(campeon) = super(campeon) + 5
 	override method puntosDeAtaqueEquipamiento(campeon) = campeon.puntosDeAtaqueBase() * 2
 	override method precio() = super() + 100
-	override method activarHabilidad(campeon){}
 }
 
 class PocionDeVida {
