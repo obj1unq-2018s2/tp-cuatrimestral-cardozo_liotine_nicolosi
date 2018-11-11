@@ -40,10 +40,10 @@ class Campeon {
 		items.remove(item)	
 		item.desequipar(self)
 	}
-	
-	method atacar(ejercitoDeMinions){
-		dinero += ejercitoDeMinions.oleadas().sum({oleada => oleada.cantidadMinions().min(self.puntosDeAtaque())})
-		ejercitoDeMinions.recibirAtaqueDe(self)
+
+	method atacar(enemigo){
+		dinero += enemigo.cantidadMinions().min(self.puntosDeAtaque())
+		enemigo.recibirAtaqueDe(self)
 	}
 	
 	method recibirDanio(cantidad){
@@ -89,6 +89,10 @@ class EjercitoDeMinions {
 	
 	method recibirAtaqueDe(campeon){
 		oleadas.forEach({oleada => oleada.recibirAtaqueDe(campeon)})
+	}
+	
+	method cantidadMinions(){
+		return oleadas.sum({oleada => oleada.cantidadMinions()})
 	}
 }
 
