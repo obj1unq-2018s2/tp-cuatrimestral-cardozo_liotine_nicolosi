@@ -1,8 +1,6 @@
 class Campeon{
 	var property puntosDeVida = 0
 	var property puntosDeAtaque = 0
-	//~ const puntosDeVidaBase = 0
-	//~ const puntosDeAtaqueBase = 0 
 	const property puntosDeAtaqueBase = 0
 	var property puntosDeDanio = 0
 	var property cantidadDeBloqueos = 0

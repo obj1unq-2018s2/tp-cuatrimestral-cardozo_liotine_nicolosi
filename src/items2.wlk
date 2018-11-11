@@ -1,5 +1,6 @@
 
 class AnilloDeDoran {
+	const property precio = 0
 	method equipar(campeon) {
 		campeon.puntosDeDanio(campeon.puntosDeDanio() + 5)
 	}
@@ -13,6 +14,7 @@ class AnilloDeDoran {
 
 
 class TomoAmplificador {
+	const property precio = 0
 	method equipar(campeon) {
 		campeon.cantidadDeBloqueos(campeon.cantidadDeBloqueos() + 2)
 	}
