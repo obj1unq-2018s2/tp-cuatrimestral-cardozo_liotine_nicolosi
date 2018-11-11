@@ -5,7 +5,7 @@ describe "tests de liga de leyendas"{
 	const campeon = new Campeon (puntosDeVidaBase = 50, puntosDeAtaqueBase = 15)
 	const anilloDeDoran = new AnilloDeDoran ()
 	const tomoAmplificador = new TomoAmplificador ()
-	const oleada = new Oleada (cantidadMinions = 10, plus = 25)
+	const oleada = new Oleada (cantidadMinionsBase = 10, plus = 25)
 	test "test" {
 		campeon.equipar(anilloDeDoran)
 		campeon.equipar(tomoAmplificador)

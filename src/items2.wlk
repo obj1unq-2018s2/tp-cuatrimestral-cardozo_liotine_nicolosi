@@ -1,6 +1,5 @@
 
 class AnilloDeDoran {
-	const property precio = 0
 	method equipar(campeon) {
 		campeon.puntosDeDanio(campeon.puntosDeDanio() + 5)
 	}
@@ -9,12 +8,14 @@ class AnilloDeDoran {
 	}
 	method puntosDeVidaEquipamiento(campeon) = 60
 	method puntosDeAtaqueEquipamiento(campeon) = 15
+	method precio() = 300
+	method activarHabilidad(campeon){}
 }
 
 
 
 class TomoAmplificador {
-	const property precio = 0
+	var usoHabilidad = false
 	method equipar(campeon) {
 		campeon.cantidadDeBloqueos(campeon.cantidadDeBloqueos() + 2)
 	}
@@ -24,6 +25,13 @@ class TomoAmplificador {
 	}
 	method puntosDeVidaEquipamiento(campeon) = campeon.puntosDeDanio() * 0.25
 	method puntosDeAtaqueEquipamiento(campeon) = campeon.puntosDeDanio() * 0.05
+	method precio() = 500
+	method activarHabilidad(campeon){
+		if(not usoHabilidad){
+			campeon.dinero(500.max(campeon.dinero()))
+			usoHabilidad = true
+		}
+	}
 }
 
 
@@ -36,4 +44,21 @@ class SombreroDeRabadon inherits TomoAmplificador {
 	override method desequipar(campeon){}
 	override method puntosDeVidaEquipamiento(campeon) = super(campeon) + 5
 	override method puntosDeAtaqueEquipamiento(campeon) = campeon.puntosDeAtaqueBase() * 2
+	override method precio() = super() + 100
+	override method activarHabilidad(campeon){}
+}
+
+class PocionDeVida {
+	var usos = 2
+	method equipar(campeon){}
+	method desequipar(campeon){}
+	method puntosDeVidaEquipamiento(campeon) = 0
+	method puntosDeAtaqueEquipamiento(campeon) = 0
+	method precio() = 50
+	method activarHabilidad(campeon){
+		if(usos > 0){
+			campeon.puntosDeDanio((campeon.puntosDeDanio() - 50).max(0))
+			usos -= 1
+		}
+	}
 }
