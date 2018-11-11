@@ -1,5 +1,5 @@
-import items2.*
-import contrincantes2.*
+import items.*
+import contrincantes.*
 
 describe "tests de liga de leyendas"{
 	const campeon = new Campeon (puntosDeVidaBase = 50, puntosDeAtaqueBase = 15)

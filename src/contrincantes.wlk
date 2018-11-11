@@ -1,38 +1,44 @@
-class Campeon{
-	var property puntosDeVida = 0
-	var property puntosDeAtaque = 0
+class Campeon {
+	const property puntosDeVidaBase = 0 
 	const property puntosDeAtaqueBase = 0
 	var property puntosDeDanio = 0
 	var property cantidadDeBloqueos = 0
-	const property items = #{}
+	const items = #{}
+	var property dinero = 0
 	
+	method estaMuerto() = self.puntosDeVida() <= puntosDeDanio
 	
-	method estaMuerto() = puntosDeVida <= puntosDeDanio
+	method puntosDeVida() = puntosDeVidaBase + items.sum({item => item.puntosDeVidaEquipamiento(self)})
 	
-	method puntosDeVida() = puntosDeVida + items.sum({item => item.puntosDeVidaEquipamiento(self)})
+	method puntosDeAtaque() = puntosDeAtaqueBase + items.sum({item => item.puntosDeAtaqueEquipamiento(self)})
 	
-	method puntosDeAtaque() = puntosDeAtaque + items.sum({item => item.puntosDeAtaqueEquipamiento(self)})
+	method comprar(item){
+		if(dinero >= item.precio()){
+			dinero -= item.precio()
+			self.equipar(item)
+		}
+		else{
+			self.error("No se tiene dinero suficiente para comprar este item")
+		}
+	}
 	
-	//	method equipar ( item) {
-	//	item.equipar (self)
-	//	}
-	//	method desequipar (item) {
-	//	item.desequipar (self)
-	//	} matias
+	method vender(item){
+		dinero += item.precio() / 2
+		item.desequipar()
+	}
 	
 	method equipar(item) {
 		items.add(item)
-		puntosDeDanio += item.puntosDeDanioEquipamiento()
-		cantidadDeBloqueos += item.bloqueosEquipamiento()
+		item.equipar (self)
 	}
 	
-	method desequipar(item){
-		items.remove(item)
-		puntosDeDanio += item.puntosDeDanioDesequipamiento()
-		cantidadDeBloqueos += item.bloqueosDesequipamiento()
+	method desequipar (item) {
+		items.remove(item)	
+		item.desequipar(self)
 	}
 	
 	method atacar(oleada){
+		dinero += oleada.cantidadMinions().min(self.puntosDeAtaque())
 		oleada.recibirAtaqueDe(self)
 	}
 	
@@ -44,22 +50,27 @@ class Campeon{
 			puntosDeDanio += cantidad	
 		}
 	}
+	
 }
 
 class Oleada {
-	var property puntosVida = 0
 	var property puntosDanio = 0
-	var property cantidadMinions = 0
+	const property cantidadMinionsBase = 0
 	var property plus = 0
 	method recibirAtaqueDe(campeon){
-		self.recibirDanio(campeon.puntosDeAtaque())
-		self.defenderseDe(campeon)
+		if(not self.estaMuerta()){
+			self.recibirDanio(campeon.puntosDeAtaque())
+			self.defenderseDe(campeon)
+		}
 	}
 	method defenderseDe(campeon){
-		campeon.recibirDanio(cantidadMinions + plus)
+		campeon.recibirDanio(self.cantidadMinions() + plus)
 	}
 	method recibirDanio(cantidad){
 		puntosDanio += cantidad
 	}
+	method cantidadMinions() = (cantidadMinionsBase - puntosDanio).max(0)
+	method estaMuerta() = cantidadMinionsBase <= puntosDanio
 }
+
 
