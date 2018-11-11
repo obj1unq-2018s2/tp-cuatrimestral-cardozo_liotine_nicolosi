@@ -4,16 +4,19 @@ import contrincantes2.*
 describe "tests de liga de leyendas"{
 	const campeon = new Campeon (puntosDeVidaBase = 50, puntosDeAtaqueBase = 15)
 	const anilloDeDoran = new AnilloDeDoran ()
-	const tomoAmplificador = new TomoAmplificador ()
+	const tomoAmplificador1 = new TomoAmplificador ()
+	const tomoAmplificador2 = new TomoAmplificador ()
 	const oleada = new Oleada (cantidadMinionsBase = 10, plus = 25)
 	test "test" {
 		campeon.equipar(anilloDeDoran)
-		campeon.equipar(tomoAmplificador)
+		campeon.equipar(tomoAmplificador1)
 		campeon.atacar(oleada)
 		campeon.atacar(oleada)
 		campeon.atacar(oleada)
-		campeon.desequipar(tomoAmplificador)
 		campeon.desequipar(anilloDeDoran)
+		campeon.desequipar(tomoAmplificador1)
+		campeon.equipar(tomoAmplificador2)
+		campeon.desequipar(tomoAmplificador2)
 		assert.that(campeon.estaMuerto())
 	}
 }
