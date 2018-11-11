@@ -1,0 +1,23 @@
+import contrincantes.*
+import items.*
+
+describe "tests de bastonDeVacio"{
+	const campeon = new Campeon (puntosDeVidaBase = 50, puntosDeAtaqueBase = 15, dinero = 800)
+	const anilloDeDoran1 = new AnilloDeDoran ()
+	const anilloDeDoran2 = new AnilloDeDoran ()
+	const bastonDeVacio = new BastonDeVacio()
+	const pocionDeVida = new PocionDeVida()
+	const sombreroDeRabadon = new SombreroDeRabadon()
+	fixture {
+		bastonDeVacio.agregar(pocionDeVida)
+		bastonDeVacio.agregar(sombreroDeRabadon)
+	}
+	test "test de bastonDeVacio"{
+		campeon.comprar(anilloDeDoran1)
+		campeon.comprar(anilloDeDoran2)
+		campeon.comprar(bastonDeVacio)
+		campeon.activarHabilidad(bastonDeVacio)
+		assert.equals(0, campeon.puntosDeDanio())
+		assert.equals(500, campeon.dinero())
+	}
+}

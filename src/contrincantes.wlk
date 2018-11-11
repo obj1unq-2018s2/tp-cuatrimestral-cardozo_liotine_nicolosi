@@ -12,6 +12,10 @@ class Campeon {
 	
 	method puntosDeAtaque() = puntosDeAtaqueBase + items.sum({item => item.puntosDeAtaqueEquipamiento(self)})
 	
+	method activarHabilidad(item){
+		item.activarHabilidad(self)
+	}
+	
 	method comprar(item){
 		if(dinero >= item.precio()){
 			dinero -= item.precio()

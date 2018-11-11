@@ -62,3 +62,18 @@ class PocionDeVida {
 		}
 	}
 }
+
+class BastonDeVacio {
+	const materiales = #{}
+	method agregar(item){
+		materiales.add(item)
+	}
+	method equipar(campeon){}
+	method desequipar(campeon){}
+	method puntosDeVidaEquipamiento(campeon) = materiales.sum { material => material.puntosDeVidaEquipamiento(campeon) } / 2
+	method puntosDeAtaqueEquipamiento(campeon) = materiales.sum { material => material.puntosDeAtaqueEquipamiento(campeon) }
+	method precio() = 0
+	method activarHabilidad(campeon){
+		materiales.forEach { material => material.activarHabilidad(campeon) }
+	}
+}
