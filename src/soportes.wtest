@@ -1,0 +1,30 @@
+import items.*
+import contrincantes.*
+
+describe "group of tests" {
+const draven = new Campeon (puntosDeVidaBase = 150 , puntosDeAtaqueBase = 25, dinero = 1000)
+const maokai = new Campeon (puntosDeVidaBase = 150 , puntosDeAtaqueBase = 25, dinero = 1000)
+const janna = new Soporte (puntosDeVidaBase = 150 , puntosDeAtaqueBase = 25, dinero = 100)
+const oleada = new Oleada (cantidadMinionsBase = 100, plus = 0)
+const tomoAmplificador = new TomoAmplificador ()
+const pocionDeVida = new PocionDeVida ()
+
+	test "test" {
+		janna.vincularA(draven)
+		draven.atacar(oleada)
+		janna.atacar(oleada)
+		janna.vincularA(maokai)
+		maokai.atacar(oleada)
+		janna.atacar(oleada)
+		maokai.comprar(tomoAmplificador)
+		janna.comprar(pocionDeVida)
+		assert.that(oleada.estaMuerta())
+		assert.equals(90, draven.puntosDeDanio())
+		assert.equals(40, maokai.puntosDeDanio())
+		assert.equals(525, maokai.dinero())
+		assert.equals(100, janna.dinero())
+		assert.that(janna.inventario().contains(pocionDeVida))
+		assert.that(janna.inventario().contains(tomoAmplificador))
+	}
+	
+}

@@ -3,7 +3,7 @@ class Campeon {
 	const property puntosDeAtaqueBase = 0
 	var property puntosDeDanio = 0
 	var property cantidadDeBloqueos = 0
-	const items = #{}
+	const property items = #{}
 	var property dinero = 0
 	
 	method estaMuerto() = self.puntosDeVida() <= puntosDeDanio
@@ -55,6 +55,27 @@ class Campeon {
 		}
 	}
 	
+}
+
+class Soporte inherits Campeon {
+	var property campeonVinculado = null //de tipo campeon
+	method inventario () {
+		return items + campeonVinculado.items()
+	}
+	override method puntosDeVida () {
+		return puntosDeVidaBase + self.inventario().sum({item => item.puntosDeVidaEquipamiento(self)})
+	}
+	override method puntosDeAtaque () {
+		return puntosDeAtaqueBase + self.inventario().sum({item => item.puntosDeAtaqueEquipamiento(self)})
+	}
+	method vincularA (nuevoCampeon) {
+		campeonVinculado = nuevoCampeon
+	}
+	override method atacar (enemigo) {
+		dinero += enemigo.cantidadMinions().min(self.puntosDeAtaque())
+		enemigo.recibirAtaqueDe(self)
+		campeonVinculado.puntosDeDanio(campeonVinculado.puntosDeDanio() - 10)
+	}
 }
 
 class Oleada {
