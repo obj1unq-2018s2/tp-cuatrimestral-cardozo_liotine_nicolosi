@@ -78,9 +78,9 @@ class Soporte inherits Campeon {
 		campeonVinculado = nuevoCampeon
 	}
 	override method atacar (enemigo) {
-		dinero += enemigo.cantidadMinions().min(self.puntosDeAtaque())
-		enemigo.recibirAtaqueDe(self)
-		campeonVinculado.puntosDeDanio(campeonVinculado.puntosDeDanio() - 10)
+//		dinero += enemigo.cantidadMinions().min(self.puntosDeAtaque())	//
+		enemigo.recibirAtaqueDe(self)									//estas dos lineas son iguales al metodo super(enemigo) si pones eso anda el test
+		campeonVinculado.puntosDeDanio(campeonVinculado.puntosDeDanio() - 10)//ojo que el danio no se haga negativo mati
 	}
 }
 
