@@ -42,8 +42,14 @@ class Campeon {
 	}
 
 	method atacar(enemigo){
-		dinero += enemigo.cantidadMinions().min(self.puntosDeAtaque())
+//		dinero += enemigo.cantidadMinions().min(self.puntosDeAtaque())
 		enemigo.recibirAtaqueDe(self)
+	}
+	
+	method dineroQueRecibeAlAtacar(oleada) = oleada.cantidadMinions().min(self.puntosDeAtaque())
+	
+	method acumularDinero(cantidad) {
+		dinero += cantidad
 	}
 	
 	method recibirDanio(cantidad){
@@ -84,6 +90,7 @@ class Oleada {
 	var property plus = 0
 	method recibirAtaqueDe(campeon){
 		if(not self.estaMuerta()){
+			campeon.acumularDinero(campeon.dineroQueRecibeAlAtacar(self))
 			self.defenderseDe(campeon)
 			self.recibirDanio(campeon.puntosDeAtaque())
 		}
@@ -112,9 +119,9 @@ class EjercitoDeMinions {
 		oleadas.forEach({oleada => oleada.recibirAtaqueDe(campeon)})
 	}
 	
-	method cantidadMinions(){
-		return oleadas.sum({oleada => oleada.cantidadMinions()})
-	}
+//	method cantidadMinions(){
+//		return oleadas.sum({oleada => oleada.cantidadMinions()})
+//	}No hace falta. Resolvi el dinero de otra forma
 }
 
 
