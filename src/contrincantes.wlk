@@ -42,7 +42,6 @@ class Campeon {
 	}
 
 	method atacar(enemigo){
-//		dinero += enemigo.cantidadMinions().min(self.puntosDeAtaque())
 		enemigo.recibirAtaqueDe(self)
 	}
 	
@@ -118,10 +117,6 @@ class EjercitoDeMinions {
 	method recibirAtaqueDe(campeon){
 		oleadas.forEach({oleada => oleada.recibirAtaqueDe(campeon)})
 	}
-	
-//	method cantidadMinions(){
-//		return oleadas.sum({oleada => oleada.cantidadMinions()})
-//	}No hace falta. Resolvi el dinero de otra forma
 }
 
 
